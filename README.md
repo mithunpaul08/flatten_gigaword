@@ -1,3 +1,7 @@
+This is the same code as [this](https://github.com/nelson-liu/flatten_gigaword) with the exception that each news article will be written as plain text in a separate file. This is useful if you
+are doing information retrieval for example using bm25
+
+
 # Flattening the Gigaword Datset
 
 The scripts in this repository dump the text of the Gigaword dataset into a single file, for use 
@@ -60,12 +64,13 @@ Gigaword data files to [`flatten_one_gigaword.py`](./flatten_one_gigaword.py) an
 
 [`flatten_all_gigaword.sh`](./flatten_all_gigaword.sh) takes in three positional arguments:
 
-1.  The path to the Gigaword directory, with all of the data files unzipped.
-
-2.  A directory to write the flattened files to and the final combined output. 
+- The path to the Gigaword directory, with all of the data files unzipped.
+- You can use this command from the root dir (the one which has data folder) to recursively unzip all the files
+  - `find . -name "*.gz" | xargs -P 5 -I fileName sh -c 'gzip -d "$(dirname "fileName")/$(basename -s .zip "fileName")" "fileName"'`
+- A directory to write the flattened files to and the final combined output. 
     It will be created if it does not exist.
 
-3. The number of files to process at once.
+- The number of files to process at once.
 
 For example, you can run:
 
