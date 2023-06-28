@@ -78,5 +78,9 @@ For example, you can run:
 ./flatten_all_gigaword.sh ./data/gigaword_eng_5/ tmp/ 24
 ```
 
+Or if you want to run just the python file on a sample data
+
+`python flatten_one_gigaword.py --gigaword-path /Users/mitch/research/lestat/GIGAWORD/small_gigaword_eng_html --output-dir data/output/`
+
 to extract data (in parallel, processing 24 files at a time) from the Gigaword corpus 
 at `./data/gigaword_eng_5/` and write the flattened files + combined output to `tmp/`. 

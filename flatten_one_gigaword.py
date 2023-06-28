@@ -5,7 +5,7 @@ import spacy
 
 from argparse import ArgumentParser
 from bs4 import BeautifulSoup
-
+from tqdm import tqdm
 en_nlp = spacy.load("en_core_web_sm")
 
 
@@ -57,6 +57,35 @@ def flatten_one_gigaword_file_return_articles(file_path):
     # space-tokenized article.
     return all_news_articles_flattened
 
+def earmark_paragraphs(file_path):
+    # Parse the text with BeautifulSoup
+    soup = BeautifulSoup(open(file_path), "html.parser")
+
+
+    all_news_articles_flattened=[]
+
+    # Iterate over all articles/docs items and get the text for each.
+    for doc in tqdm(soup("doc"),desc="articles"):
+        paragraphs = doc.find_all("p")
+        this_article=[]
+        if paragraphs:
+            for para in paragraphs:
+                # Turn inter-paragraph newlines into spaces
+                article = re.sub(r"\n+", "\n", para.string)
+                article = article.replace("\n", " ")
+                # Tokenize the paragraph into words_in_paragraph
+                tokens = en_nlp.tokenizer(article)
+                words_in_paragraph = [str(token) for token in tokens if not
+                         str(token).isspace()]
+                if len(words_in_paragraph) < 3:
+                    continue
+                this_article.append(" ".join(words_in_paragraph)+"~~~~~~~~~~\n") #using "~~~~~~~~~~" to earmark paragraph separator
+        # Return a list of strings, where each string is a
+        # space-tokenized article.
+        all_news_articles_flattened.append("\n".join(this_article))
+    return all_news_articles_flattened
+
+
 
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -75,7 +104,7 @@ if __name__ == "__main__":
 
     A = parser.parse_args()
     # all_paragraphs = flatten_one_gigaword_file(A.gigaword_path)
-    all_articles_this_document = flatten_one_gigaword_file_return_articles(A.gigaword_path)
+    all_articles_this_document = earmark_paragraphs(A.gigaword_path)
     for index,article in enumerate(all_articles_this_document):
         output_path = os.path.join(A.output_dir,
                                os.path.basename(A.gigaword_path))
