@@ -14,5 +14,5 @@ mkdir -p $OUTPUTDIR
 find ${GIGAWORDDIR}/data/*/* | parallel --gnu --progress -j ${NUMJOBS} python flatten_one_gigaword.py \
                                         --gigaword-path \{\} --output-dir ${OUTPUTDIR}
 
-echo "Combining the flattened files into one..."
-cat ${OUTPUTDIR}/*.flat > ${OUTPUTDIR}/flattened_gigaword.txt
+#echo "Combining the flattened files into one..."
+#cat ${OUTPUTDIR}/*.flat > ${OUTPUTDIR}/flattened_gigaword.txt
