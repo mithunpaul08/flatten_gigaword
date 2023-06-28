@@ -75,7 +75,7 @@ Gigaword data files to [`flatten_one_gigaword.py`](./flatten_one_gigaword.py) an
 For example, you can run:
 
 ```
-./flatten_all_gigaword.sh ./data/gigaword_eng_5/ tmp/ 24
+./flatten_all_gigaword.sh /Users/mitch/research/lestat/GIGAWORD/only_2010_html_data/ /Users/mitch/research/lestat/GIGAWORD/only_2010_data_flattened_one_article_per_document/ 24
 ```
 
 Or if you want to run just the python file on a sample data

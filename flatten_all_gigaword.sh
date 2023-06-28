@@ -11,15 +11,8 @@ export NUMJOBS=$3
 echo "Flattening Gigaword with ${NUMJOBS} processes..."
 mkdir -p $OUTPUTDIR
 
-
-#find ${GIGAWORDDIR}/data/*/* | parallel --gnu --progress -j ${NUMJOBS} python flatten_one_gigaword.py \
-#                                        --gigaword-path \{\} --output-dir ${OUTPUTDIR}
-
-
-find ${GIGAWORDDIR}/data/*/* | python flatten_one_gigaword.py \
+find ${GIGAWORDDIR}/data/*/* | parallel --gnu --progress -j ${NUMJOBS} python flatten_one_gigaword.py \
                                         --gigaword-path \{\} --output-dir ${OUTPUTDIR}
-
-
 
 echo "Combining the flattened files into one..."
 cat ${OUTPUTDIR}/*.flat > ${OUTPUTDIR}/flattened_gigaword.txt
