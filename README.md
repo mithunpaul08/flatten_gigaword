@@ -17,11 +17,6 @@ more information about how the code in this repo works.
 
 ## Installation
 
-To run this code, you must have **GNU Parallel**. This can be installed on Ubuntu with:
-
-```
-sudo apt-get install parallel
-```
 
 This project was developed in Python 3.6, but should work with Python 3.x and 2.x.
 Please raise an issue if you find that this is not the case.
@@ -54,7 +49,18 @@ needed to run the code in this package.
     ```
     python -m spacy download en
     ```
-    
+6. ate: if you have a conda environment you can run `mamba install parallel`
+
+
+Extra info: for whatever reason you choose to run Parallel in codna    To run this code, you must have **GNU Parallel**. This can be installed on Ubuntu with:
+
+```
+sudo apt-get install parallel
+```
+more details about GNU Parallel is kept [here](./flatten_all_gigaword.sh /home/jovyan/data-store/home/mithunpaul08/lestat/data/gigaword/only_one_input_file/ /home/jovyan/data-store/home/mithunpaul08/lestat/data/flattened_gigaword_2009_2010/articles_from_only_one_gigaword_input_file/ 2)
+
+
+upd
 ## Usage
 
 [`flatten_one_gigaword.py`](./flatten_one_gigaword.py) takes in the path of a Gigaword data file
